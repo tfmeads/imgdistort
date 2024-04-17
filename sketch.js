@@ -1,7 +1,6 @@
-let exampleShader;
+let distortShader;
 
 let backgroundImage;
-
 
 const CC_VELOCITY = 41;
 var velocity = .1;
@@ -31,15 +30,13 @@ var ctrls = [];
 
 function preload() {
   // load in the shader
-  exampleShader = loadShader('basic.vert', 'distort.frag');
+  distortShader = loadShader('basic.vert', 'distort.frag');
 
   // load in the image
 
-  //backgroundImage = loadImage('dog.jpeg');
+  backgroundImage = loadImage('dog.jpeg');
   backgroundImage = loadImage('wormgirlcropped.jpg');
 }
-
-
 
 function setup(){ 
   var canvas = createCanvas(windowWidth + 500, windowHeight + 100, WEBGL);
@@ -88,31 +85,16 @@ function setup(){
 
   //TODO LOAD CONTROLS FROM JSON
 
-  shader(exampleShader);
+  shader(distortShader);
   
-  exampleShader.setUniform("background", backgroundImage);
-  exampleShader.setUniform("iResolution",[windowWidth,windowHeight]);
+  distortShader.setUniform("background", backgroundImage);
+  distortShader.setUniform("iResolution",[windowWidth,windowHeight]);
 }
 
 function draw() {
-  exampleShader.setUniform("millis", millis() % 30000);
-  // exampleShader.setUniform("clrInterval",size_b);
-  // exampleShader.setUniform("raySize",size_a);
-
-  ctrls.forEach((element) => element.updateShader(exampleShader));
-
-
-
-  // let ctrl = getCtrl(CC_ACCEL);
-
-  // exampleShader.setUniform(ctrl.varName,ctrl.val);
-
-
-  // exampleShader.setUniform("velocity",velocity);
-  // exampleShader.setUniform("divisions",X1);
-  // exampleShader.setUniform("scale",X2);
-  // exampleShader.setUniform("fade",fade);
-
+  distortShader.setUniform("millis", millis() % 30000);
+  
+  ctrls.forEach((element) => element.updateShader(distortShader));
 
   // Run shader
   rect(-width/2, -height/2, width);

@@ -14,9 +14,9 @@ class MidiCtrl {
         this.min = 0; //minimum mapped value
         this.max = 1; //maximum mapped value
         this.varName = varName; //name of variable in shader
-        this.lastUpdate = 0;
         this.isBoolean = false; //determines whether CC is On/Off rather than 0-127
         this.active = false; //state of boolean
+        this.lastUpdate = 0;
         this.lerp = true;
         this.lerpAmt = 0.1;
   
@@ -25,7 +25,6 @@ class MidiCtrl {
         this.midiInput.onMIDIMessage = this.onMIDIMessage.bind(this);   
         
         console.log("Loaded CC" + this.CC + " " + this.name);
-
       }
 
 
