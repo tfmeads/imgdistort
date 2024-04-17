@@ -19,8 +19,8 @@ const X1_MIN = 1.2;
 const X1_MAX = 12;
 const CC_X2 = 44;
 var X2 = 1;
-const CC_EVIL = 24;
-var evilMode = false;
+const CC_RESTART = 24;
+var lastRestart = 0;
 const CC_CUE = 14;
 const CUE_TIME = 333;
 var CUE_MODE = false; //when true, wait until CC value stops changing to change actual value
@@ -56,6 +56,8 @@ function setup(){
   var acc = new MidiCtrl(CC_FADE,'Fade','fade',0);
   acc.min = 0;
   acc.max = 2;
+  this.lerpAmt = .9;
+
 
   ctrls[acc.CC] = acc;
   var acc = new MidiCtrl(CC_SIZE_A,'Ray Size','raySize',0);
@@ -83,6 +85,10 @@ function setup(){
   cue.isBoolean = true;
   ctrls[cue.CC] = cue;
 
+  var cue = new MidiCtrl(CC_RESTART,'RESTART','',0);
+  cue.isBoolean = true;
+  ctrls[cue.CC] = cue;
+
   //TODO LOAD CONTROLS FROM JSON
 
   shader(distortShader);
@@ -92,8 +98,16 @@ function setup(){
 }
 
 function draw() {
-  distortShader.setUniform("millis", millis() % 30000);
+  //distortShader.setUniform("millis", millis() % 30000);
   
+  ctrl = getCtrl(CC_RESTART);
+  if(ctrl.active){
+    lastRestart = millis();
+    ctrl.active = false;
+  }
+  
+  distortShader.setUniform("millis", millis() - lastRestart);
+
   ctrls.forEach((element) => element.updateShader(distortShader));
 
   // Run shader
