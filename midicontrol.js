@@ -28,8 +28,6 @@ class MidiCtrl {
       }
 
 
-       
-  
 
     
       onMIDIMessage(data) {

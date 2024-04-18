@@ -14,10 +14,6 @@ uniform float divisions;
 uniform float scale;
 uniform float fade;
 
-float rand(vec2 co){
-    return fract(sin(dot(co, vec2(12.9898, 78.233))) * 43758.5453);
-}
-
 void main() {
   
   vec2 newPos = pos;
@@ -45,9 +41,4 @@ void main() {
   
 
   gl_FragColor = mix(col,col2, -.3 + raySize * mod(abs(tan(clrTime /  -uv.y * uv.x)),111.));
-  
-  
-  //gl_FragColor = mix(col,col2, -.3 + raySize * tan(mod(millis/ 1111.,11.) /  uv.y * uv.x));
 }
-
-
