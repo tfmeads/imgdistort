@@ -37,15 +37,25 @@ var imgs =
   {
     'file' : 'eyetapestry.jpeg',
     'x' : 0,
-    'y' : 500
+    'y' : 555
   },
   {
     'file' : 'wormgirlcropped.jpg',
     'x' : 500,
     'y' : 100
-  }
+  },
+  {
+    'file' : 'clown.jpg',
+    'x' : 0,
+    'y' : 0
+  },
+  {
+    'file' : 'sunsetsky.jpg',
+    'x' : 0,
+    'y' : 0
+  },
 ];
-var img = imgs[1];
+var img = imgs[0];
 
 function preload() {
   // load in the shader
